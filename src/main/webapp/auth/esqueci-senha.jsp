@@ -20,8 +20,8 @@
 	<div class="card" style="width: 25rem;">
 		<div class="card-body">
 		<h5 class="card-title">Esqueci a Senha</h5>
-			<form action="${pageContext.request.contextPath}/auth/esqueci-senha" method="post">
-				<div class="form-group">
+			<form action="${pageContext.request.contextPath}/auth/esqueci-senha" method="post" class="row g-3 needs-validation" novalidate>
+				<div class="col-md-12">
 				    <label for="login">CPF ou E-mail do usuário</label>
 				    <input type="text" class="form-control" id="login" name="login" placeholder="Digite seu CPF(números) ou e-mail" minlength="4" maxlength="20" required="required">
 				</div>

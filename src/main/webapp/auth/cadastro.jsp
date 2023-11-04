@@ -20,8 +20,8 @@
 	<div class="card" style="width: 25rem;">
 		<div class="card-body">
 		<h5 class="card-title">Cadastro de Usuário</h5>
-			<form action="${pageContext.request.contextPath}/auth/cadastro" method="post">
-				<div class="form-group">
+			<form action="${pageContext.request.contextPath}/auth/cadastro" method="post" class="row g-3 needs-validation" novalidate>
+				<div class="col-md-12">
 				    <label for="nome">Nome</label>
 				    <input type="nome" class="form-control" id="nome" name="nome" placeholder="Digite seu Nome" minlength="13" maxlength="150" required="required">
 				    <c:if test="${errors != null && not empty errors.nome}">
@@ -30,7 +30,7 @@
 					    </div>
 				    </c:if>
 				</div>
-				<div class="form-group">
+				<div class="col-md-12">
 				    <label for="login">CPF</label>
 				    <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite seu CPF (apenas números)" minlength="11" maxlength="11" required="required">
 				    <c:if test="${errors != null && not empty errors.cpf}">
@@ -39,7 +39,7 @@
 					    </div>
 				    </c:if>
 				</div>
-				<div class="form-group">
+				<div class="col-md-12">
 				    <label for="login">E-mail</label>
 				    <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu E-mail" required="required">
 				    <c:if test="${errors != null && not empty errors.email}">
@@ -48,7 +48,7 @@
 					    </div>
 				    </c:if>
 				</div>
-				<div class="form-group">
+				<div class="col-md-12">
 				    <label for="password">Senha</label>
 				    <input type="password" class="form-control" id="password" name="password" placeholder="Senha" minlength="6" maxlength="20" required="required">
 				    <c:if test="${errors != null && not empty errors.password}">

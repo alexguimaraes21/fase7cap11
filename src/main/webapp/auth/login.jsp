@@ -51,7 +51,7 @@
 					<br />
 					<a href="${pageContext.request.contextPath}/auth/esqueci-senha">Esqueci a Senha</a>
 				</p>
-				<button type="submit" class="btn btn-primary">Login</button>
+				<button type="submit" class="btn btn-primary btn-block">Login</button>
 			</form>
 		</div>
 	</div>
