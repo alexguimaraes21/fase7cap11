@@ -20,25 +20,31 @@
 	<div class="card" style="width: 25rem;">
 		<div class="card-body">
 		<h5 class="card-title">Login</h5>
-			<form action="${pageContext.request.contextPath}/auth/login" method="post">
-				<div class="form-group">
+			<form action="${pageContext.request.contextPath}/auth/login" method="post" class="row g-3 needs-validation" novalidate>
+				<div class="col-md-12">
 				    <label for="login">CPF ou E-mail do usuário</label>
-				    <input type="text" class="form-control" id="login" name="login" placeholder="Digite seu CPF(números) ou e-mail" minlength="4" maxlength="20" required="required">
-				    <c:if test="${errors != null && not empty errors.username}">
+				    <input type="text" class="form-control ${ errors.containsKey('login') ? 'is-invalid' : '' }" id="login" name="login" placeholder="Digite seu CPF(números) ou e-mail" minlength="4" maxlength="20" required="required">
+				    <c:if test="${errors != null && errors.containsKey('login') }">
 				    	<div class="invalid-feedback">
-					    	${ errors.username }
+					    	${ errors.login }
 					    </div>
 				    </c:if>
 				</div>
-				<div class="form-group">
+				<div class="col-md-12">
 				    <label for="password">Senha</label>
-				    <input type="password" class="form-control" id="password" name="password" placeholder="Senha" minlength="6" maxlength="20" required="required">
-				    <c:if test="${errors != null && not empty errors.password}">
+				    <input type="password" class="form-control ${ errors.containsKey('password') ? 'is-invalid' : '' }" id="password" name="password" placeholder="Senha" minlength="6" maxlength="20" required="required">
+				    <c:if test="${errors != null && errors.containsKey('password')}">
 				    	<div class="invalid-feedback">
 					    	${ errors.password }
 					    </div>
 				    </c:if>
 				</div>
+				<c:if test="${ errors != null && errors.containsKey('authentication') }">
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						${ errors.authentication }
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				</c:if>
 				<br />
 				<p>
 					<a href="${pageContext.request.contextPath}/auth/cadastro">Cadastre-se aqui</a>
@@ -50,7 +56,7 @@
 		</div>
 	</div>
 </div>
-<script src="<%= request.getContextPath() %>/assets/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="<%= request.getContextPath() %>/assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

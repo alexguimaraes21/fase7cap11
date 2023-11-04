@@ -30,26 +30,27 @@ public class AuthLoginServlet extends HttpServlet {
 		AuthenticationService authService = new AuthenticationService();
 		
 		Map<String, String> errors = new HashMap<>();
-		if ("".equals(username) || username.isEmpty()) {
-			errors.put("login", "Campo obrigatório");
-		}
-		
+
 		if (username.length() <= 3) {
 			errors.put("login", "Login deve conter no mínimo 4 caracteres");
 		}
 		
-		if ("".equals(password) || password.isEmpty()) {
-			errors.put("password", "Campo obrigatório");
+		if (username.isBlank()) {
+			errors.put("login", "Campo obrigatório");
 		}
 		
-		if (username.length() <= 5) {
+		if (password.length() <= 5) {
 			errors.put("password", "Senha deve conter no mínimo 6 caracteres");
+		}
+		
+		if (password.isBlank()) {
+			errors.put("password", "Campo obrigatório");
 		}
 		
 		if (errors.isEmpty()) {
 			Boolean userIsAuthenticated = authService.authUser(username, password, req);
 			if (!userIsAuthenticated) {
-				errors.put("autenticantion", "Usuário ou senha inválidos");
+				errors.put("authentication", "Usuário ou senha inválidos");
 			} else {
 				resp.sendRedirect(req.getContextPath() + "/");
 			}

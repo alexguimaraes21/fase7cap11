@@ -63,12 +63,12 @@
 					<br />
 					<a href="${pageContext.request.contextPath}/auth/esqueci-senha">Esqueci a Senha</a>
 				</p>
-				<button type="submit" class="btn btn-primary">Login</button>
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
 			</form>
 		</div>
 	</div>
 </div>
-<script src="<%= request.getContextPath() %>/assets/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="<%= request.getContextPath() %>/assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
