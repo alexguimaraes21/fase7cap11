@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import br.com.fiap.fase7cap11.models.Usuario;
 import br.com.fiap.fase7cap11.utils.DbConnection;
@@ -47,6 +48,23 @@ public class UsuarioDao implements ICrudDao<Usuario> {
 			}
 		} catch (SQLException e) {
 			System.out.println("Erro ao extrair o usuário com ID [ " + id + " ]. Erro [ " + e.getMessage() + " ].");
+			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
+		}
+		return usuario;
+	}
+	
+	public Usuario getByCpfOrEmail(String login) {
+		Usuario usuario = null;
+		try(PreparedStatement stmt = getConnection().prepareStatement("SELECT cd_usuario, vl_cpf_usuario, ds_email, nm_usuario, ds_senha, ck_usuario_ativo FROM T_USUARIO"
+				+ " WHERE ? IN (vl_cpf_usuario, ds_email) AND ck_usuario_ativo = 1")) {
+			stmt.setString(1, login);
+			try (ResultSet rs = stmt.executeQuery()) {
+				if(rs.next()) {
+					usuario = criarUsuario(rs);
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao extrair o usuário com CPF ou E-mail [ " + login + " ]. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
 		}
 		return usuario;

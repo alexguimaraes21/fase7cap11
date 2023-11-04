@@ -16,6 +16,10 @@ public class UsuarioService {
 	public Usuario getById(long id) {
 		return dao.getById(id);
 	}
+	
+	public Usuario getByCpfOrEmail(String login) {
+		return dao.getByCpfOrEmail(login);
+	}
 
 	public void save(String vlCpf, String dsSenha, String nmUsuario, Boolean ckUsuarioAtivo, Long id) {
 		Usuario usuario = new Usuario();

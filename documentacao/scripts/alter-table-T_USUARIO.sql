@@ -1,0 +1,1 @@
+alter table T_USUARIO add DS_EMAIL varchar2(255) not null;
