@@ -48,4 +48,14 @@ public class AuthenticationService {
 		HttpSession session = req.getSession();
 		session.invalidate();;
 	}
+	
+	public Usuario getUsuario(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		if (usuario != null) {
+			return usuario;
+		} else {
+			return null;
+		}
+	}
 }
