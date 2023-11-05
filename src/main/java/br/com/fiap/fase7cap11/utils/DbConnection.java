@@ -8,9 +8,9 @@ import oracle.jdbc.driver.OracleDriver;
 
 public class DbConnection {
 	
-	private static String url = "jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL";
-	private static String username = "rm97596";
-	private static String password = "211081";
+	private static String url = Params.dbUrl;
+	private static String username = Params.dbUser;
+	private static String password = Params.dbPassword;
 	private static Connection connection;
 	
 	public static Connection getConnection() throws SQLException {

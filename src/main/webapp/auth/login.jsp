@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Fintech - Login</title>
     <link href="<%= request.getContextPath() %>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/assets/css/style.css" rel="stylesheet">
     <style>
     	body{
 	    	height: 100vh;
