@@ -23,7 +23,7 @@ public class UsuarioDao implements ICrudDao<Usuario> {
 		
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		try(Statement stmt = getConnection().createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT cd_usuario, vl_cpf_usuario, nm_usuario, ds_senha, ck_usuario_ativo FROM T_USUARIO")) {
+				ResultSet rs = stmt.executeQuery("SELECT cd_usuario, vl_cpf_usuario, nm_usuario, ds_senha, ds_email, ck_usuario_ativo FROM T_USUARIO")) {
 			while(rs.next()) {
 				Usuario usuario = criarUsuario(rs);
 				usuarios.add(usuario);
@@ -38,7 +38,7 @@ public class UsuarioDao implements ICrudDao<Usuario> {
 	@Override
 	public Usuario getById(Long id) {
 		Usuario usuario = null;
-		try(PreparedStatement stmt = getConnection().prepareStatement("SELECT cd_usuario, vl_cpf_usuario, nm_usuario, ds_senha, ck_usuario_ativo FROM T_USUARIO"
+		try(PreparedStatement stmt = getConnection().prepareStatement("SELECT cd_usuario, vl_cpf_usuario, nm_usuario, ds_senha, ds_email, ck_usuario_ativo FROM T_USUARIO"
 				+ " WHERE cd_usuario = ?")) {
 			stmt.setLong(1, id);
 			try (ResultSet rs = stmt.executeQuery()) {
@@ -75,17 +75,18 @@ public class UsuarioDao implements ICrudDao<Usuario> {
 		
 		String sql = "";
 		if(t.getId() != null && t.getId() > 0) {
-			sql = "UPDATE T_USUARIO SET vl_cpf_usuario = ?, nm_usuario = ?, ds_senha = ?, ck_usuario_ativo = ? WHERE cd_usuario = ?";
+			sql = "UPDATE T_USUARIO SET vl_cpf_usuario = ?, nm_usuario = ?, ds_senha = ?, ds_email = ? ck_usuario_ativo = ? WHERE cd_usuario = ?";
 		} else {
-			sql = "INSERT INTO T_USUARIO (vl_cpf_usuario, nm_usuario, ds_senha, ck_usuario_ativo, cd_usuario) VALUES (?, ?, ?, ?, SEQ_USUARIO.NEXTVAL)";
+			sql = "INSERT INTO T_USUARIO (vl_cpf_usuario, nm_usuario, ds_senha, ds_email, ck_usuario_ativo, cd_usuario) VALUES (?, ?, ?, ?, ?, SEQ_USUARIO.NEXTVAL)";
 		}
 		try(PreparedStatement stmt = getConnection().prepareStatement(sql)) {
 			stmt.setString(1, t.getVlCpf());
 			stmt.setString(2, t.getNmUsuario());
 			stmt.setString(3, t.getDsSenha());
-			stmt.setInt(4, t.isCkUsuarioAtivo() ? 1 : 0);
+			stmt.setString(4, t.getDsEmail());
+			stmt.setInt(5, t.isCkUsuarioAtivo() ? 1 : 0);
 			if(t.getId() != null && t.getId() > 0) {
-				stmt.setLong(5, t.getId());
+				stmt.setLong(6, t.getId());
 			}
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -113,6 +114,7 @@ public class UsuarioDao implements ICrudDao<Usuario> {
 		usuario.setVlCpf(rs.getString("vl_cpf_usuario"));
 		usuario.setNmUsuario(rs.getString("nm_usuario"));
 		usuario.setDsSenha(rs.getString("ds_senha"));
+		usuario.setDsEmail(rs.getString("ds_email"));
 		usuario.setCkUsuarioAtivo(rs.getInt("ck_usuario_ativo") == 1 ? true : false);
 		return usuario;
 	}

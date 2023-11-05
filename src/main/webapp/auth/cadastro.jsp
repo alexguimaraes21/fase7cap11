@@ -23,40 +23,52 @@
 			<form action="${pageContext.request.contextPath}/auth/cadastro" method="post" class="row g-3 needs-validation" novalidate>
 				<div class="col-md-12">
 				    <label for="nome">Nome</label>
-				    <input type="nome" class="form-control" id="nome" name="nome" placeholder="Digite seu Nome" minlength="13" maxlength="150" required="required">
-				    <c:if test="${errors != null && not empty errors.nome}">
+				    <input type="nome" class="form-control ${ msgs.containsKey('nome') ? 'is-invalid' : '' }" id="nome" name="nome" placeholder="Digite seu Nome" minlength="10" maxlength="150" required="required">
+				    <c:if test="${msgs != null && not empty msgs.nome}">
 				    	<div class="invalid-feedback">
-					    	${ errors.nome }
+					    	${ msgs.nome }
 					    </div>
 				    </c:if>
 				</div>
 				<div class="col-md-12">
 				    <label for="login">CPF</label>
-				    <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite seu CPF (apenas números)" minlength="11" maxlength="11" required="required">
-				    <c:if test="${errors != null && not empty errors.cpf}">
+				    <input type="text" class="form-control cpf ${ msgs.containsKey('cpf') ? 'is-invalid' : '' }" id="cpf" name="cpf" placeholder="Digite seu CPF (apenas números)" required="required">
+				    <c:if test="${msgs != null && not empty msgs.cpf}">
 				    	<div class="invalid-feedback">
-					    	${ errors.cpf }
+					    	${ msgs.cpf }
 					    </div>
 				    </c:if>
 				</div>
 				<div class="col-md-12">
 				    <label for="login">E-mail</label>
-				    <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu E-mail" required="required">
-				    <c:if test="${errors != null && not empty errors.email}">
+				    <input type="email" class="form-control ${ msgs.containsKey('email') ? 'is-invalid' : '' }" id="email" name="email" placeholder="Digite seu E-mail" required="required">
+				    <c:if test="${msgs != null && not empty msgs.email}">
 				    	<div class="invalid-feedback">
-					    	${ errors.email }
+					    	${ msgs.email }
 					    </div>
 				    </c:if>
 				</div>
 				<div class="col-md-12">
 				    <label for="password">Senha</label>
-				    <input type="password" class="form-control" id="password" name="password" placeholder="Senha" minlength="6" maxlength="20" required="required">
-				    <c:if test="${errors != null && not empty errors.password}">
+				    <input type="password" class="form-control ${ msgs.containsKey('password') ? 'is-invalid' : '' }" id="password" name="password" placeholder="Senha" minlength="6" maxlength="20" required="required">
+				    <c:if test="${msgs != null && not empty msgs.password}">
 				    	<div class="invalid-feedback">
-					    	${ errors.password }
+					    	${ msgs.password }
 					    </div>
 				    </c:if>
 				</div>
+				<c:if test="${ msgs != null && msgs.containsKey('exception') }">
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						${ msgs.exception }
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				</c:if>
+				<c:if test="${ msgs != null && msgs.containsKey('success') }">
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						${ msgs.success }
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				</c:if>
 				<br />
 				<p>
 					<a href="${pageContext.request.contextPath}/auth/login">Login</a>
@@ -70,5 +82,11 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="<%= request.getContextPath() %>/assets/js/bootstrap.bundle.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/js/jquery.mask.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('.cpf').mask('000.000.000-00', {reverse: true});
+	})
+</script>
 </body>
 </html>

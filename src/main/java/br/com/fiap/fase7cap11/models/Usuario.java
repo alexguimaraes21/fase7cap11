@@ -6,15 +6,17 @@ public class Usuario {
 	private String vlCpf;
 	private String dsSenha;
 	private String nmUsuario;
+	private String dsEmail;
 	private boolean ckUsuarioAtivo;
 	
 	public Usuario() { }
 
-	public Usuario(Long id, String vlCpf, String dsSenha, String nmUsuario, boolean ckUsuarioAtivo) {
+	public Usuario(Long id, String vlCpf, String dsSenha, String nmUsuario, String dsEmail, boolean ckUsuarioAtivo) {
 		this.id = id;
 		this.vlCpf = vlCpf;
 		this.dsSenha = dsSenha;
 		this.nmUsuario = nmUsuario;
+		this.dsEmail = dsEmail;
 		this.ckUsuarioAtivo = ckUsuarioAtivo;
 	}
 
@@ -48,6 +50,14 @@ public class Usuario {
 	
 	public void setNmUsuario(String nmUsuario) {
 		this.nmUsuario = nmUsuario;
+	}
+	
+	public String getDsEmail() {
+		return dsEmail;
+	}
+	
+	public void setDsEmail(String dsEmail) {
+		this.dsEmail = dsEmail;
 	}
 	
 	public boolean isCkUsuarioAtivo() {

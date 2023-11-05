@@ -26,13 +26,13 @@
         
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            ${not empty sessionScope.username? sessionScope.username: "Conta"}
+            ${sessionScope.usuario != null? sessionScope.usuario.getNmUsuario(): "Conta"}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
             <a class="dropdown-item"
-            href="${pageContext.request.contextPath}/${not empty sessionScope.username? "logout": "login"}">
-            ${not empty sessionScope.username? "Logout": "Login"}
+            href="${pageContext.request.contextPath}/auth/${not empty sessionScope.username? "logout": "login"}">
+            ${not empty sessionScope.usuario? "Logout": "Login"}
             </a>
             </li>
           </ul>

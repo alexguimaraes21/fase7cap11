@@ -15,7 +15,7 @@ public class AuthenticationService {
 		if (usuario != null) {
 			String encryptedPassword = PasswordEncryption.hashPassword(password);
 			if(encryptedPassword.equals(usuario.getDsSenha())) {
-				this.setSession(null, usuario);
+				this.setSession(req, usuario);
 				return true;
 			}
 			return false;
@@ -42,5 +42,10 @@ public class AuthenticationService {
 	public void setSession(HttpServletRequest req, Usuario usuario) {
 		HttpSession session = req.getSession();
 		session.setAttribute("usuario", usuario);
+	}
+	
+	public void destroySession(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		session.invalidate();;
 	}
 }

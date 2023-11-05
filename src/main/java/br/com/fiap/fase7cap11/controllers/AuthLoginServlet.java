@@ -48,11 +48,16 @@ public class AuthLoginServlet extends HttpServlet {
 		}
 		
 		if (errors.isEmpty()) {
-			Boolean userIsAuthenticated = authService.authUser(username, password, req);
-			if (!userIsAuthenticated) {
-				errors.put("authentication", "Usuário ou senha inválidos");
-			} else {
-				resp.sendRedirect(req.getContextPath() + "/");
+			try {
+				Boolean userIsAuthenticated = authService.authUser(username, password, req);
+				if (!userIsAuthenticated) {
+					errors.put("authentication", "Usuário ou senha inválidos");
+				} else {
+					resp.sendRedirect(req.getContextPath() + "/");
+					return;
+				}
+			} catch (Exception e) {
+				errors.put("exception", "Erro na autenticação do usuário. Tente novamente mais tarde!");
 			}
 		}
 		req.setAttribute("errors", errors);

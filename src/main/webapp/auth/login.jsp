@@ -23,7 +23,7 @@
 			<form action="${pageContext.request.contextPath}/auth/login" method="post" class="row g-3 needs-validation" novalidate>
 				<div class="col-md-12">
 				    <label for="login">CPF ou E-mail do usuário</label>
-				    <input type="text" class="form-control ${ errors.containsKey('login') ? 'is-invalid' : '' }" id="login" name="login" placeholder="Digite seu CPF(números) ou e-mail" minlength="4" maxlength="20" required="required">
+				    <input type="text" class="form-control ${ errors.containsKey('login') ? 'is-invalid' : '' }" id="login" name="login" placeholder="Digite seu CPF(números) ou e-mail" minlength="4" maxlength="150" required="required">
 				    <c:if test="${errors != null && errors.containsKey('login') }">
 				    	<div class="invalid-feedback">
 					    	${ errors.login }
