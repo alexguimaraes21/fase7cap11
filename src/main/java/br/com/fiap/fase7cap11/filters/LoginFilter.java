@@ -22,11 +22,13 @@ public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		Usuario usuario = this.authService.getUsuario((HttpServletRequest) request);
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse resp = (HttpServletResponse)response;
 		if(usuario != null) {
 			chain.doFilter(request, response);
 		} else {
-			((HttpServletResponse)response).sendError(HttpServletResponse.SC_UNAUTHORIZED,
-                    "Você não tem permissão para acessar esta página!");
+			resp.sendRedirect(req.getContextPath() + "/auth/login");
+			return;
 		}
 	}
 }

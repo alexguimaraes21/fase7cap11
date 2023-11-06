@@ -18,13 +18,12 @@ public class ContaService {
 		return dao.getById(id);
 	}
 
-//	public void save(String vlAgencia, String vlConta, String vlBanco, Usuario usuario, Long id) {
-	public void save(String vlAgencia, String vlConta, String vlBanco, Long id) {
+	public void save(String vlAgencia, String vlConta, String vlBanco, Usuario usuario, Long id) {
 		Conta conta = new Conta();
 		if(id != null && id > 0) {
 			conta.setId(id);
 		}
-//		conta.setUsuario(usuario);
+		conta.setUsuario(usuario);
 		conta.setVlAgencia(vlAgencia);
 		conta.setVlBanco(vlBanco);
 		conta.setVlConta(vlConta);

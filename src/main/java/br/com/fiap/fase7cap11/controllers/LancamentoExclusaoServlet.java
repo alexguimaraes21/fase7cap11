@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LancamentoServlet
+ * Servlet implementation class ContaEdicaoServlet
  */
-@WebServlet("/lancamento")
-public class LancamentoServlet extends HttpServlet {
+@WebServlet("/lancamento/excluir")
+public class LancamentoExclusaoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LancamentoServlet() {
+    public LancamentoExclusaoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

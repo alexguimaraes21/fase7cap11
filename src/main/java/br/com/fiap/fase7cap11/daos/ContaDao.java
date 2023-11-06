@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.fiap.fase7cap11.models.Conta;
+import br.com.fiap.fase7cap11.services.AuthenticationService;
 import br.com.fiap.fase7cap11.utils.DbConnection;
 
 public class ContaDao implements ICrudDao<Conta> {
+	
+	AuthenticationService authService = new AuthenticationService();
 	
 	private Connection getConnection() throws SQLException {
 		return DbConnection.getConnection();
@@ -58,19 +61,17 @@ public class ContaDao implements ICrudDao<Conta> {
 		
 		String sql = "";
 		if(t.getId() != null && t.getId() > 0) {
-//			sql = "UPDATE T_CONTA SET vl_agencia = ?, vl_conta = ?, vl_banco = ?, cd_usuario = ? WHERE cd_conta = ?";
-			sql = "UPDATE T_CONTA SET vl_agencia = ?, vl_conta = ?, vl_banco = ? WHERE cd_conta = ?";
+			sql = "UPDATE T_CONTA SET vl_agencia = ?, vl_conta = ?, vl_banco = ?, cd_usuario = ? WHERE cd_conta = ?";
 		} else {
-//			sql = "INSERT INTO T_CONTA (vl_agencia, vl_conta, vl_banco, cd_usuario, cd_conta) VALUES (?, ?, ?, ?, SEQ_CONTA.NEXTVAL)";
-			sql = "INSERT INTO T_CONTA (vl_agencia, vl_conta, vl_banco, cd_conta) VALUES (?, ?, ?, SEQ_CONTA.NEXTVAL)";
+			sql = "INSERT INTO T_CONTA (vl_agencia, vl_conta, vl_banco, cd_usuario, cd_conta) VALUES (?, ?, ?, ?, SEQ_CONTA.NEXTVAL)";
 		}
 		try(PreparedStatement stmt = getConnection().prepareStatement(sql)) {
 			stmt.setString(1, t.getVlAgencia());
 			stmt.setString(2, t.getVlConta());
 			stmt.setString(3, t.getVlBanco());
-//			stmt.setLong(4, t.getUsuario().getId());
+			stmt.setLong(4, t.getUsuario().getId());
 			if(t.getId() != null && t.getId() > 0) {
-				stmt.setLong(4, t.getId());
+				stmt.setLong(5, t.getId());
 			} 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -82,7 +83,7 @@ public class ContaDao implements ICrudDao<Conta> {
 	@Override
 	public void delete(Long id) {
 		try(PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM T_CONTA WHERE cd_conta = ?")) {
-			stmt.setLong(0, id);
+			stmt.setLong(1, id);
 			stmt.executeQuery();
 			stmt.executeUpdate();
 		} catch (SQLException e) {

@@ -2,7 +2,7 @@
 <jsp:include page="./../template/header.jsp" />
 
 
-/conta/conta.jsp
+/tipo-investimento/conta.jsp
 
 
 <jsp:include page="./../template/footer.jsp" />
