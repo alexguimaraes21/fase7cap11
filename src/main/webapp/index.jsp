@@ -2,7 +2,5 @@
 <jsp:include page="./template/header.jsp" />
 
 
-Index.jsp
-
 
 <jsp:include page="./template/footer.jsp" />

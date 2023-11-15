@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./../template/header.jsp" />
 
+	<div class="p-3 pb-md-4 mx-auto">
+		<h1>Edição de Conta - Agência: ${ conta.getVlAgencia() } - Conta: ${ conta.getVlConta() }</h1>
+	</div>
 	<div class="card">
 		<div class="card-header">Edição da Conta: ${ conta.getVlConta() }</div>
 		<div class="card-body">

@@ -7,35 +7,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.fiap.fase7cap11.services.TipoInvestimentoService;
+import br.com.fiap.fase7cap11.services.TipoLancamentoService;
+
 /**
  * Servlet implementation class ContaEdicaoServlet
  */
-@WebServlet("/tipo-investimento/excluir")
+@WebServlet("/tipo-investimento/excluir/*")
 public class TipoInvestimentoExclusaoServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public TipoInvestimentoExclusaoServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	TipoInvestimentoService tipoInvestimentoService = new TipoInvestimentoService();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String pathInfo = req.getPathInfo();
+		String[] pathParts = pathInfo.split("/");
+		Long idTipoInvestimento = Long.parseLong(pathParts[1]);
+		
+		tipoInvestimentoService.delete(idTipoInvestimento);
+		resp.sendRedirect(req.getContextPath() + "/tipo-investimento");
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

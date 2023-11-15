@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./../template/header.jsp" />
 
+	<div class="p-3 pb-md-4 mx-auto">
+		<h1>Cadastro de Conta</h1>
+	</div>
 	<div class="card">
 		<div class="card-header">Cadastro de Conta</div>
 		<div class="card-body">

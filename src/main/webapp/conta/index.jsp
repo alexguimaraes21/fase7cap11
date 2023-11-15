@@ -3,7 +3,9 @@
 
 <jsp:include page="./../template/header.jsp" />
 
-
+	<div class="p-3 pb-md-4 mx-auto">
+		<h1>Contas</h1>
+	</div>
 	<div class="card">
 		<div class="card-header">
 			Contas Cadastradas<a href="<%= request.getContextPath() %>/conta/cadastro" class="btn btn-outline-primary btn-sm float-end">Cadastrar</a>

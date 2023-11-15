@@ -54,7 +54,7 @@ public class TipoInvestimentoDao implements ICrudDao<TipoInvestimento> {
 
 	@Override
 	public void save(TipoInvestimento t) {
-		
+		System.out.println(t.toString());
 		String sql = "";
 		if(t.getId() != null && t.getId() > 0) {
 			sql = "UPDATE T_TIPO_INVESTIMENTO SET ds_tipo_investimento = ?, vl_rendimento_mensal = ?, prazo_minimo_investimento = ? WHERE cd_tipo_investimento = ?";
@@ -77,8 +77,8 @@ public class TipoInvestimentoDao implements ICrudDao<TipoInvestimento> {
 
 	@Override
 	public void delete(Long id) {
-		try(PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM T_TIPO_INVESTIMENTO WHERE cd_conta = ?")) {
-			stmt.setLong(0, id);
+		try(PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM T_TIPO_INVESTIMENTO WHERE cd_tipo_investimento = ?")) {
+			stmt.setLong(1, id);
 			stmt.executeQuery();
 			stmt.executeUpdate();
 		} catch (SQLException e) {

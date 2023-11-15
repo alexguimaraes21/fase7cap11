@@ -56,7 +56,7 @@ public class TipoLancamentoDao implements ICrudDao<TipoLancamento> {
 		
 		String sql = "";
 		if(t.getId() != null && t.getId() > 0) {
-			sql = "UPDATE T_TIPO_LANCAMENTO SET ds_tipo = ? WHERE cd_conta = ?";
+			sql = "UPDATE T_TIPO_LANCAMENTO SET ds_tipo = ? WHERE cd_tipo = ?";
 		} else {
 			sql = "INSERT INTO T_TIPO_LANCAMENTO (ds_tipo, cd_tipo) VALUES (?, SEQ_TIPO_LANCAMENTO.NEXTVAL)";
 		}
@@ -74,8 +74,8 @@ public class TipoLancamentoDao implements ICrudDao<TipoLancamento> {
 
 	@Override
 	public void delete(Long id) {
-		try(PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM T_TIPO_LANCAMENTO WHERE cd_conta = ?")) {
-			stmt.setLong(0, id);
+		try(PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM T_TIPO_LANCAMENTO WHERE cd_tipo = ?")) {
+			stmt.setLong(1, id);
 			stmt.executeQuery();
 			stmt.executeUpdate();
 		} catch (SQLException e) {
