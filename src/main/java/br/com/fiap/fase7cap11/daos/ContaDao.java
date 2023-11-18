@@ -30,6 +30,7 @@ public class ContaDao implements ICrudDao<Conta> {
 				Conta conta = criarConta(rs);
 				contas.add(conta);
 			}
+			getConnection().close();
 		} catch(SQLException e) {
 			System.out.println("Erro ao extrair as contas. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
@@ -49,6 +50,7 @@ public class ContaDao implements ICrudDao<Conta> {
 					conta = criarConta(rs);
 				}
 			}
+			getConnection().close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao extrair a conta com ID [ " + id + " ]. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
@@ -74,6 +76,7 @@ public class ContaDao implements ICrudDao<Conta> {
 				stmt.setLong(5, t.getId());
 			} 
 			stmt.executeUpdate();
+			getConnection().close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao salvar ou atualizar a conta. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
@@ -86,6 +89,7 @@ public class ContaDao implements ICrudDao<Conta> {
 			stmt.setLong(1, id);
 			stmt.executeQuery();
 			stmt.executeUpdate();
+			getConnection().close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao remover a conta com ID [ " + id + " ]. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");

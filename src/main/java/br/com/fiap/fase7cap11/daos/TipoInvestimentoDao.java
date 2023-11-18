@@ -22,11 +22,12 @@ public class TipoInvestimentoDao implements ICrudDao<TipoInvestimento> {
 		List<TipoInvestimento> tipoInvestimentos = new ArrayList<TipoInvestimento>();
 		try(Statement stmt = getConnection().createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT cd_tipo_investimento, ds_tipo_investimento, vl_rendimento_mensal, prazo_minimo_investimento "
-						+ "FROM T_TIPO_INVESTIMENTO")) {
+						+ "FROM T_TIPO_INVESTIMENTO ORDER BY cd_tipo_investimento ASC")) {
 			while(rs.next()) {
 				TipoInvestimento tipoInvestimento = criarTipoInvestimento(rs);
 				tipoInvestimentos.add(tipoInvestimento);
 			}
+			getConnection().close();
 		} catch(SQLException e) {
 			System.out.println("Erro ao extrair as carteiras de investimentos. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
@@ -45,6 +46,7 @@ public class TipoInvestimentoDao implements ICrudDao<TipoInvestimento> {
 					tipoInvestimento = criarTipoInvestimento(rs);
 				}
 			}
+			getConnection().close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao extrair a carteira de investimento com ID [ " + id + " ]. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
@@ -54,7 +56,6 @@ public class TipoInvestimentoDao implements ICrudDao<TipoInvestimento> {
 
 	@Override
 	public void save(TipoInvestimento t) {
-		System.out.println(t.toString());
 		String sql = "";
 		if(t.getId() != null && t.getId() > 0) {
 			sql = "UPDATE T_TIPO_INVESTIMENTO SET ds_tipo_investimento = ?, vl_rendimento_mensal = ?, prazo_minimo_investimento = ? WHERE cd_tipo_investimento = ?";
@@ -69,6 +70,7 @@ public class TipoInvestimentoDao implements ICrudDao<TipoInvestimento> {
 				stmt.setLong(4, t.getId());
 			} 
 			stmt.executeUpdate();
+			getConnection().close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao salvar ou atualizar a carteira de investimento. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
@@ -81,6 +83,7 @@ public class TipoInvestimentoDao implements ICrudDao<TipoInvestimento> {
 			stmt.setLong(1, id);
 			stmt.executeQuery();
 			stmt.executeUpdate();
+			getConnection().close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao remover a conta com ID [ " + id + " ]. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");

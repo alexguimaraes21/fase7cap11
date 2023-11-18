@@ -27,6 +27,7 @@ public class UsuarioDao implements ICrudDao<Usuario> {
 				Usuario usuario = criarUsuario(rs);
 				usuarios.add(usuario);
 			}
+			getConnection().close();
 		} catch(SQLException e) {
 			System.out.println("Erro ao extrair os usuários. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
@@ -45,6 +46,7 @@ public class UsuarioDao implements ICrudDao<Usuario> {
 					usuario = criarUsuario(rs);
 				}
 			}
+			getConnection().close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao extrair o usuário com ID [ " + id + " ]. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
@@ -62,6 +64,7 @@ public class UsuarioDao implements ICrudDao<Usuario> {
 					usuario = criarUsuario(rs);
 				}
 			}
+			getConnection().close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao extrair o usuário com CPF ou E-mail [ " + login + " ]. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
@@ -88,6 +91,7 @@ public class UsuarioDao implements ICrudDao<Usuario> {
 				stmt.setLong(6, t.getId());
 			}
 			stmt.executeUpdate();
+			getConnection().close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao salvar ou atualizar o usuario. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
@@ -100,6 +104,7 @@ public class UsuarioDao implements ICrudDao<Usuario> {
 			stmt.setLong(0, id);
 			stmt.executeQuery();
 			stmt.executeUpdate();
+			getConnection().close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao remover o usuário com ID [ " + id + " ]. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");

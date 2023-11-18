@@ -1,6 +1,5 @@
 package br.com.fiap.fase7cap11.services;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -23,25 +22,31 @@ public class LancamentoService {
 		return dao.getById(id);
 	}
 
-	public void save(double vlLancamento, String dtLancamento, String dsLancamento, 
-//			TipoLancamento tipoLancamento, Usuario usuario, Conta conta, 
-			TipoLancamento tipoLancamento, Conta conta,
-			TipoInvestimento tipoInvestimento, Long id) {
+	public void save(double vlLancamento, String dsLancamento, Long cdTipoLancamento, Long cdConta, Long cdTipoInvestimento, Usuario usuario, Long id) {
+		TipoLancamento tipoLancamento = new TipoLancamento();
+		tipoLancamento.setId(cdTipoLancamento);
+		
+		TipoInvestimento tipoInvestimento = new TipoInvestimento();
+		tipoInvestimento.setId(cdTipoInvestimento);
+		
+		Conta conta = new Conta();
+		conta.setId(cdConta);
+		
 		Lancamento lancamento = new Lancamento();
 		if(id != null && id > 0) {
 			lancamento.setId(id);
 		}
 		try {
-			Date dataLancamento = new SimpleDateFormat("dd/MM/yyyy").parse(dtLancamento);
+			Date dataLancamento = new Date();
 			lancamento.setVlLancamento(vlLancamento);
 			lancamento.setDtLancamento(dataLancamento);
 			lancamento.setDsLancamento(dsLancamento);
 			lancamento.setTipoLancamento(tipoLancamento);
-			if(tipoLancamento.getId() == 3) { // Investimento
-				lancamento.setTipoIvestimento(tipoInvestimento);
+			if(tipoLancamento.getId() == 3) {
+				lancamento.setTipoInvestimento(tipoInvestimento);
 			}
 			lancamento.setConta(conta);
-//			lancamento.setUsuario(usuario);
+			lancamento.setUsuario(usuario);
 			dao.save(lancamento);
 		} catch (Exception e) {
 			System.out.println("Erro na data do Lançamento. Formato de data aceito: dd/mm/yyyy");

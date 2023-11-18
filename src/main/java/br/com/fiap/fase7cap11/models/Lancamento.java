@@ -9,7 +9,7 @@ public class Lancamento {
 	private Date dtLancamento;
 	private String dsLancamento;
 	private TipoLancamento tipoLancamento;
-	private TipoInvestimento tipoIvestimento;
+	private TipoInvestimento tipoInvestimento;
 	private Conta conta;
 	private Usuario usuario;
 	
@@ -20,7 +20,7 @@ public class Lancamento {
 		this.dtLancamento = dtLancamento;
 		this.dsLancamento = dsLancamento;
 		this.tipoLancamento = tipoLancamento;
-		this.tipoIvestimento = tipoIvestimento;
+		this.tipoInvestimento = tipoIvestimento;
 		this.conta = conta;
 		this.usuario = usuario;
 	}
@@ -67,12 +67,12 @@ public class Lancamento {
 		this.tipoLancamento = tipoLancamento;
 	}
 
-	public TipoInvestimento getTipoIvestimento() {
-		return tipoIvestimento;
+	public TipoInvestimento getTipoInvestimento() {
+		return tipoInvestimento;
 	}
 
-	public void setTipoIvestimento(TipoInvestimento tipoIvestimento) {
-		this.tipoIvestimento = tipoIvestimento;
+	public void setTipoInvestimento(TipoInvestimento tipoInvestimento) {
+		this.tipoInvestimento = tipoInvestimento;
 	}
 
 	public Conta getConta() {

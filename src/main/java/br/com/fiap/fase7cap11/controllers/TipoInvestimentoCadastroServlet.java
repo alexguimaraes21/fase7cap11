@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.fiap.fase7cap11.services.AuthenticationService;
 import br.com.fiap.fase7cap11.services.TipoInvestimentoService;
-import br.com.fiap.fase7cap11.services.TipoLancamentoService;
 
 /**
  * Servlet implementation class ContaCadastroServlet

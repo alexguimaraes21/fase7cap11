@@ -22,11 +22,12 @@ public class TipoLancamentoDao implements ICrudDao<TipoLancamento> {
 		
 		List<TipoLancamento> contas = new ArrayList<TipoLancamento>();
 		try(Statement stmt = getConnection().createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT cd_tipo, ds_tipo FROM T_TIPO_LANCAMENTO")) {
+				ResultSet rs = stmt.executeQuery("SELECT cd_tipo, ds_tipo FROM T_TIPO_LANCAMENTO ORDER BY cd_tipo ASC")) {
 			while(rs.next()) {
 				TipoLancamento tipoLancamento = criarTipoLancamento(rs);
 				contas.add(tipoLancamento);
 			}
+			getConnection().close();
 		} catch(SQLException e) {
 			System.out.println("Erro ao extrair as contas. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
@@ -44,6 +45,7 @@ public class TipoLancamentoDao implements ICrudDao<TipoLancamento> {
 					tipoLancamento = criarTipoLancamento(rs);
 				}
 			}
+			getConnection().close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao extrair a conta com ID [ " + id + " ]. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
@@ -66,6 +68,7 @@ public class TipoLancamentoDao implements ICrudDao<TipoLancamento> {
 				stmt.setLong(2, t.getId());
 			} 
 			stmt.executeUpdate();
+			getConnection().close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao salvar ou atualizar a conta. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
@@ -78,6 +81,7 @@ public class TipoLancamentoDao implements ICrudDao<TipoLancamento> {
 			stmt.setLong(1, id);
 			stmt.executeQuery();
 			stmt.executeUpdate();
+			getConnection().close();
 		} catch (SQLException e) {
 			System.out.println("Erro ao remover a conta com ID [ " + id + " ]. Erro [ " + e.getMessage() + " ].");
 			System.out.println("Trace do erro [ " + e.getStackTrace().toString() + " ].");
